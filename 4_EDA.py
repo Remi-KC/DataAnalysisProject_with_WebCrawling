@@ -210,7 +210,7 @@ import matplotlib.dates as md
 # 設定上下方兩個子圖比例
 gs = gridspec.GridSpec(2, 1, height_ratios=[1, 3])
 fig = plt.figure(figsize = (18, 8), dpi=200)
-fig.subplots_adjust(hspace=0.05)
+fig.subplots_adjust(hspace=0.09)
 ax1 = fig.add_subplot(gs[0])
 ax2 = fig.add_subplot(gs[1])
 
@@ -245,7 +245,7 @@ ax1.tick_params(which="both", top=False, labeltop=False)  # 不顯示子圖(上)
 # 繪製刪除線
 d = .5  # proportion of vertical to horizontal extent of the slanted line
 kwargs = dict(marker=[(-1, -d), (1, d)], markersize=12,
-              linestyle="none", color='k', mec='k', mew=1, clip_on=False)
+              linestyle="none", color='r', mec='r', mew=1, clip_on=False)
 ax1.plot([0],[0], transform=ax1.transAxes, **kwargs)
 ax2.plot([0],[1], transform=ax2.transAxes, **kwargs)
 
@@ -261,7 +261,7 @@ ax1.grid()
 ax2.grid()
 
 # 存檔
-plt.savefig(path2+"add_Ym.png", bbox_inches="tight")
+plt.savefig(path2+"add_Ym_new.png", bbox_inches="tight")
 plt.show()
 
 #%% 作品發佈後多久會上架平台？（新作品上架比例）
@@ -362,13 +362,51 @@ add_m_mean = add_m.groupby(['platform', 'f_date_add_Ym', "f_date_add_m"]).size()
 add_m_mean["f_date_add_m"] = add_m_mean["f_date_add_m"].apply(lambda x: calendar.month_abbr[int(x)])
 add_m_mean = add_m_mean.rename(columns={0:"mean"})
 
+# 看一下Netflix分佈跟標準差
+add_m_mean[add_m_mean["platform"]=="Netflix"].describe()
+'''
+            mean
+count   12.000000
+mean   163.041667
+std     26.792518
+min    111.500000
+25%    151.250000
+50%    167.750000
+75%    181.750000
+max    201.500000
+'''
+# 看一下Disney+分佈跟標準差
+add_m_mean[add_m_mean["platform"]=="Disney+"].describe()
+'''
+            mean
+count  12.000000
+mean   29.458333
+std     8.897033
+min    12.000000
+25%    25.750000
+50%    28.000000
+75%    33.125000
+max    43.000000
+'''
+
 #%% 上架作品分析：劇荒期vs.劇豐期在哪些月份？
 # 作圖
 plt.figure(figsize = (10, 6), dpi=200)
 f = sns.lineplot(x="f_date_add_m", y="mean", hue="platform", data=add_m_mean,palette=["#B81D24", "#113CCF"],
              hue_order=["Netflix", "Disney+"], marker="o", markeredgecolor=None, alpha=.8)
-f.axhline(add_m_mean[add_m_mean["platform"]=="Netflix"]["mean"].mean(),ls="--", lw=1.2, c="#221F1F", alpha=.5)
-f.axhline(add_m_mean[add_m_mean["platform"]=="Disney+"]["mean"].mean(),ls="--", lw=1.2, c="DeepSkyBlue", alpha=.5)
+# 平均值線
+mean_n = add_m_mean[add_m_mean["platform"]=="Netflix"]["mean"].mean()
+mean_d = add_m_mean[add_m_mean["platform"]=="Disney+"]["mean"].mean()
+f.axhline(mean_n,ls="--", lw=1.2, c="#221F1F", alpha=.5)
+f.axhline(mean_d,ls="--", lw=1.2, c="DeepSkyBlue", alpha=.5)
+
+# +-1個標準差線
+std_n = add_m_mean[add_m_mean["platform"]=="Netflix"]["mean"].std()
+std_d = add_m_mean[add_m_mean["platform"]=="Disney+"]["mean"].std()
+f.axhline(mean_n+std_n,ls="-.", lw=1.2, c="#B81D24", alpha=.5)
+f.axhline(mean_n-std_n,ls="-.", lw=1.2, c="#B81D24", alpha=.5)
+f.axhline(mean_d+std_d,ls="-.", lw=1.2, c="#113CCF", alpha=.5)
+f.axhline(mean_d-std_d,ls="-.", lw=1.2, c="#113CCF", alpha=.5)
 
 y_n = list(add_m_mean[(add_m_mean["platform"]=="Netflix")&((add_m_mean["f_date_add_m"]=="Apr")|(add_m_mean["f_date_add_m"]=="Jul")|(add_m_mean["f_date_add_m"]=="Dec"))]["mean"])
 x_n = ["Apr", "Jul", "Dec"]
