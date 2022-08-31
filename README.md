@@ -126,7 +126,7 @@
 <br>
 
 ### 問題2：如何省略部分座標軸？（broken axis）
-* [參考](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/broken_axis.html)
+* [參考1](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/broken_axis.html)、[參考2](https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/broken_axis.html)
 * 心得：認識關鍵詞彙broken axis。官網給的範例很詳盡，往後就算有需要在另外一個座標軸上畫broken axis、修改刪除線的位置、其他細節調整等等，應該都可以做到。
 <br>
 
