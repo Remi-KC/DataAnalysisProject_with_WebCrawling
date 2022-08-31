@@ -48,7 +48,7 @@
 <br>
 
 ### 2.有什麼類型的影片？
-![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/genre.png)
+![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/genre_.png)
 * 影視作品的比例在Netflix 和Disney+ 差不多，電影約佔七成，電視則約佔三成。
 * Netflix的影片類型以國際化內容為最多（21%），劇情片次多（16%），而喜劇位列第三（12%）。Disney+ 的影片類型則以家庭劇最多（16%），動畫片次多（15%），喜劇第三（14%），動作冒險片第四（12%）。
 * 兩平台在影片類型的分佈上各有特色。此外，這樣的分佈比例不論在電視或電影作品裡面都相仿，可以看作是平台本身選擇影片的調性。
