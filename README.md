@@ -2,6 +2,7 @@
 ## ---Data Analysis & Web Crawling Project 
 
 >完成於2022.08.24
+>花費時間:約10個晚上
 <br>
 
 ## 一、	研究動機
