@@ -119,21 +119,29 @@
 * 嘗試3：用（片名）合併後再篩選出相同片名裡面評分人次最高的
     * 背後的假設是：評分人數多的作品比較熱門，比較有可能上架平台。
     * 可行，但是計算發現這樣猜測出來的配對筆數，在有評分的資料裡面佔四成，比例有點高，覺得用猜測的不太理想。
+    ![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/1_.png)
 <br>
 
 * 嘗試4：用（片名）去IMDb官網爬取其ID，取得ID後再用來合併資料
     * 首先觀察官網的搜尋網址，發現搜尋詞的位置，以及符號變化規則
+    ![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/2_.png)<br>
+ 
     * 利用官網搜尋時，會自動將最精準的那部影片連結放在第一個位子，去定位取得連結中的影片ID
+    ![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/1_2.png)<br>
+    
     * 成功：在總共10257部影片中，取得9907部影片的IMDb ID
+    ![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/3_.png)
 <br>
 
 ### 問題2：如何省略部分座標軸？（broken axis）
-* [參考1](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/broken_axis.html)、[參考2](https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/broken_axis.html)
-* 心得：認識關鍵詞彙broken axis。官網給的範例很詳盡，往後就算有需要在另外一個座標軸上畫broken axis、修改刪除線的位置、其他細節調整等等，應該都可以做到。
+* [參考1](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/broken_axis.html)、[參考2](https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/broken_axis.html)<br>
+![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/4_.png)<br>
+* 心得：認識到關鍵詞彙broken axis。有了這次的經驗，往後就算有需要在另外一個座標軸上畫broken axis、修改刪除線的位置、其他細節調整等等，都可以做到。
 <br>
 
 ### 問題3：histplot中，怎麼在特定的bar上面設定文字跟顏色？
 * [參考1](https://stackoverflow.com/questions/71201475/seaborn-how-to-change-the-color-of-individual-bars-in-histogram)、[參考2](https://stackoverflow.com/questions/70673809/plotting-seaborn-histplot-bar-label-with-condition)
-* 心得：學到ax.patches、ax.containers[0].datavalues的用法，也發現bar_label裡面的labels參數可以用來設定顯示bar值的條件。
+![image](https://github.com/Remi-KC/DataAnalysisProject_with_WebCrawling/blob/main/Plot/5_.png)<br>
+* 心得：學到ax.patches、ax.containers[0].datavalues的用法，並能活用bar_label裡面的labels參數，自己撰寫條件設定。
 
  
